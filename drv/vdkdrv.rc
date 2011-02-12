@@ -1,0 +1,36 @@
+/*
+	vdkdrv.rc
+
+	Resource for Virtual Disk kernel-mode driver
+	Copyright (C) 2003 Ken Kato
+*/
+
+//	!!! NOTE !!!
+//	Editing this file with Microsoft Visual Studio will almost
+//	certainly mess things up...
+
+#ifndef APSTUDIO_INVOKED
+
+#include <winver.h>
+#include "vdkver.h"
+
+#define VDK_FILEFLAGSMASK		VS_FFI_FILEFLAGSMASK
+
+#if DBG
+#define VDK_FILEFLAGS			VS_FF_DEBUG
+#else
+#define VDK_FILEFLAGS			0
+#endif
+
+#define VDK_FILEOS				VOS_NT_WINDOWS32
+#define VDK_FILETYPE			VFT_DRV
+#define VDK_FILESUBTYPE 		VFT2_DRV_SYSTEM
+
+#define VDK_DESCRIPTION 		"Virtual Disk Kernel-mode Driver"
+#define VDK_INTERNALNAME		VDK_DRIVER_FILENAME
+#define VDK_FILEVERSION			VDK_DRIVER_VERSION
+#define VDK_FILEVERSION_STR		VDK_DRIVER_VERSION_STR
+
+#include <vdkver.rc>
+
+#endif	// APSTUDIO_INVOKED

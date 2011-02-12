@@ -1,0 +1,57 @@
+/*
+	vdkver.rc
+
+	VDK version resource script
+	Copyright (C) 2003 Ken Kato
+*/
+
+//	!!! NOTE !!!
+//	Editing this file with Microsoft Visual Studio will almost
+//	certainly mess things up...
+
+#ifndef APSTUDIO_INVOKED
+
+VS_VERSION_INFO	VERSIONINFO
+FILEVERSION    	VDK_FILEVERSION
+PRODUCTVERSION 	VDK_PRODUCT_VERSION
+FILEFLAGSMASK  	VDK_FILEFLAGSMASK
+FILEFLAGS	   	VDK_FILEFLAGS
+FILEOS		   	VDK_FILEOS
+FILETYPE	   	VDK_FILETYPE
+FILESUBTYPE    	VDK_FILESUBTYPE
+BEGIN
+	BLOCK "StringFileInfo"
+	BEGIN
+		BLOCK 	VDK_VERSIONINFO_LANG
+		BEGIN
+			VALUE "CompanyName",	 VDK_COMPANY_NAME
+			VALUE "FileDescription", VDK_DESCRIPTION
+			VALUE "FileVersion",	 VDK_FILEVERSION_STR
+			VALUE "InternalName",	 VDK_INTERNALNAME
+			VALUE "LegalCopyright",  "Copyright (c) " VDK_COPYRIGHT_YEARS " " VDK_COMPANY_NAME
+			VALUE "OriginalFilename",VDK_INTERNALNAME
+			VALUE "ProductName",	 VDK_PRODUCT_NAME
+			VALUE "ProductVersion",  VDK_PRODUCT_VERSION_STR
+		END
+#ifdef VDK_VERSIONINFO_ALT
+		BLOCK 	VDK_VERSIONINFO_ALT
+		BEGIN
+			VALUE "CompanyName",	 VDK_COMPANY_NAME_ALT
+			VALUE "FileDescription", VDK_DESCRIPTION_ALT
+			VALUE "FileVersion",	 VDK_FILEVERSION_STR
+			VALUE "InternalName",	 VDK_INTERNALNAME
+			VALUE "LegalCopyright",  "Copyright (c) " VDK_COPYRIGHT_YEARS " " VDK_COMPANY_NAME_ALT
+			VALUE "OriginalFilename",VDK_INTERNALNAME
+			VALUE "ProductName",	 VDK_PRODUCT_NAME_ALT
+			VALUE "ProductVersion",  VDK_PRODUCT_VERSION_STR
+		END
+#endif	// VDK_VERSIONINFO_ALT
+	END
+
+	BLOCK "VarFileInfo"
+	BEGIN
+		VALUE "Translation", VDK_VERSIONINFO_TRANS
+	END
+END
+
+#endif	// APSTUDIO_INVOKED

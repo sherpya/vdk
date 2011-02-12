@@ -1,0 +1,12 @@
+obj*_*_*
+Debug
+Release
+ipch
+*.dat
+*.suo
+*.sdf
+*.filters
+*.user
+*.opensdf
+*.dll
+*.exe

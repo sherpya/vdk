@@ -1,0 +1,13 @@
+#
+# cmn/SOURCES
+# build parameter file for VDK NT kernel-mode driver library
+# Copyright (C) 2003 Ken Kato
+#
+
+TARGETNAME=vdkdrv
+TARGETTYPE=DRIVER_LIBRARY
+
+INCLUDES=..\inc
+C_DEFINES=-DVDK_KERNEL_DRIVER
+
+SOURCES=vdkopen.c vdkclose.c vdkread.c vdkwrite.c

@@ -1,0 +1,55 @@
+/*
+	vdkcmd.rc
+
+	Version Resource for Virtual Disk control program
+	Copyright (C) 2003-2005 Ken Kato
+*/
+
+//	!!! NOTE !!!
+//	Editing this file with Microsoft Visual Studio will almost
+//	certainly mess things up...
+
+#ifndef APSTUDIO_INVOKED
+
+//
+//	version resource
+//
+#include <winver.h>
+#include "vdkver.h"
+
+#define VDK_FILEFLAGSMASK		VS_FFI_FILEFLAGSMASK
+
+#ifdef _DEBUG
+#define VDK_FILEFLAGS			VS_FF_DEBUG
+#else
+#define VDK_FILEFLAGS			0
+#endif
+
+#define VDK_FILEOS				VOS_NT_WINDOWS32
+#define VDK_FILETYPE			VFT_APP
+#define VDK_FILESUBTYPE 		VFT2_UNKNOWN
+
+#define VDK_DESCRIPTION 		"Virtual Disk Driver Control Program"
+#define VDK_INTERNALNAME		"vdk.exe"
+#define VDK_FILEVERSION			3,2,0,0
+#define VDK_FILEVERSION_STR		"3.2"
+
+//
+//	for Japanese version resources
+//
+#define VDK_VERSIONINFO_ALT		"041104B0"
+#undef VDK_VERSIONINFO_TRANS
+#define VDK_VERSIONINFO_TRANS	0x0409, 0x04B0, 0x0411, 0x04B0
+
+#define VDK_COMPANY_NAME_ALT	VDK_COMPANY_NAME
+#define VDK_DESCRIPTION_ALT		"Virtual Disk コンソールプログラム"
+#define VDK_PRODUCT_NAME_ALT	VDK_PRODUCT_NAME
+
+#include "vdkver.rc"
+
+//
+//	message resource
+//
+#include "vdkmsg.rc"
+
+#endif	  // not APSTUDIO_INVOKED
