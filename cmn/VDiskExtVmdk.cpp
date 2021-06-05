@@ -77,7 +77,7 @@ VDKSTAT VDiskExtVmdk::Check()
 	//
 	if (m_Header.Signature != VMDK_SIGNATURE) {
 
-		cbparams[1] = (PVOID)m_Header.Signature;
+		cbparams[1] = (PVOID)(UINT_PTR)m_Header.Signature;
 
 		if (!VDiskCallBack(VDISK_CB_SIGNATURE, cbparams)) {
 			return VDK_CANCEL;
@@ -92,7 +92,7 @@ VDKSTAT VDiskExtVmdk::Check()
 	//
 	if (m_Header.FileVersion != VMDK_FILEVER_VMWARE4) {
 
-		cbparams[1] = (PVOID)m_Header.FileVersion;
+		cbparams[1] = (PVOID)(UINT_PTR)m_Header.FileVersion;
 
 		m_Header.FileVersion = VDiskCallBack(
 			VDISK_CB_VMDK_FILEVER, cbparams);
@@ -186,7 +186,7 @@ VDKSTAT VDiskExtVmdk::Check()
 		m_Header.numGTEsPerGT != 512 &&
 		m_Header.numGTEsPerGT != 1024) {
 
-		cbparams[1] = (PVOID)m_Header.numGTEsPerGT;
+		cbparams[1] = (PVOID)(INT_PTR)m_Header.numGTEsPerGT;
 
 		if (!VDiskCallBack(VDISK_CB_VMDK_GTESPERGT, cbparams)) {
 			return VDK_DATA;
@@ -259,8 +259,8 @@ VDKSTAT VDiskExtVmdk::Check()
 	//
 	if (m_nCapacity != m_Header.CapacityLow) {
 
-		cbparams[1] = (PVOID)m_Header.CapacityLow;
-		cbparams[2] = (PVOID)m_nCapacity;
+		cbparams[1] = (PVOID)(UINT_PTR)m_Header.CapacityLow;
+		cbparams[2] = (PVOID)(UINT_PTR)m_nCapacity;
 
 		if (!VDiskCallBack(VDISK_CB_VMDK_SIZEMISMATCH, cbparams)) {
 

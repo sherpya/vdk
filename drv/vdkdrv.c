@@ -55,8 +55,8 @@ DriverEntry (
 
 	// Get driver config data from registry
 
-	reg_path = ExAllocatePool(
-		PagedPool, RegistryPath->Length + sizeof(WCHAR));
+	reg_path = ExAllocatePool2(
+		POOL_FLAG_PAGED, RegistryPath->Length + sizeof(WCHAR), 'drv ');
 
 	if (reg_path) {
 #if DBG
@@ -67,7 +67,6 @@ DriverEntry (
 #endif
 		idx = 0;
 
-		RtlZeroMemory(reg_path, RegistryPath->Length + sizeof(WCHAR));
 		RtlMoveMemory(reg_path, RegistryPath->Buffer, RegistryPath->Length);
 
 		RtlZeroMemory(reg_param, sizeof(reg_param));

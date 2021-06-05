@@ -36,10 +36,10 @@ ULONG VDiskCallback(ULONG reason, PVOID *params)
 	//				FALSE	fail
 	case VDISK_CB_FILE_OPEN:
 		PrintMessage(MSG_CB_FILE_OPEN,
-			(PCHAR)params[0], VdkStatusStr((ULONG)params[1]));
+			(PCHAR)params[0], VdkStatusStr((ULONG)(UINT_PTR)params[1]));
 
-		if ((ULONG)params[1] == VDK_NOFILE ||
-			(ULONG)params[1] == VDK_NOPATH) {
+		if ((ULONG)(UINT_PTR)params[1] == VDK_NOFILE ||
+			(ULONG)(UINT_PTR)params[1] == VDK_NOPATH) {
 
 			//
 			//	file not found -- prompt user for a correct path
@@ -106,7 +106,7 @@ ULONG VDiskCallback(ULONG reason, PVOID *params)
 	//				FALSE	abort
 	case VDISK_CB_SIGNATURE:
 		PrintMessage(MSG_CB_SIGNATURE,
-			(PCHAR)params[0], (ULONG)params[1]);
+			(PCHAR)params[0], (ULONG)(UINT_PTR)params[1]);
 
 		ret = (InputChar(MSG_PROMPT_ABORTIGNORE, "ai") == 'i');
 		break;
@@ -271,7 +271,7 @@ ULONG VDiskCallback(ULONG reason, PVOID *params)
 	//				FALSE	abort
 	case VDISK_CB_EXT_OFFSET:
 		PrintMessage(MSG_CB_EXT_OFFSET,
-			(PCHAR)params[0], (ULONG)params[1], (ULONG)params[2]);
+			(PCHAR)params[0], (ULONG)(UINT_PTR)params[1], (ULONG)(UINT_PTR)params[2]);
 
 		ret = (InputChar(MSG_PROMPT_YESNO, "yn") == 'y');
 		break;
@@ -284,9 +284,9 @@ ULONG VDiskCallback(ULONG reason, PVOID *params)
 	//				0	abort
 	case VDISK_CB_EXT_FILESIZE:
 		PrintMessage(MSG_CB_EXT_FILESIZE,
-			(PCHAR)params[0], (ULONG)params[1], (ULONG)params[2]);
+			(PCHAR)params[0], (ULONG)(UINT_PTR)params[1], (ULONG)(UINT_PTR)params[2]);
 
-		ret = ((InputChar(MSG_PROMPT_YESNO, "yn") == 'y') ? (ULONG)params[2] : 0);
+		ret = ((InputChar(MSG_PROMPT_YESNO, "yn") == 'y') ? (ULONG)(UINT_PTR)params[2] : 0);
 		break;
 
 	//	described disk capacity does not match the total of extents
@@ -297,7 +297,7 @@ ULONG VDiskCallback(ULONG reason, PVOID *params)
 	//				FALSE	abort
 	case VDISK_CB_EXT_CAPACITY:
 		PrintMessage(MSG_CB_EXT_CAPACITY,
-			(PCHAR)params[0], (ULONG)params[1], (ULONG)params[2]);
+			(PCHAR)params[0], (ULONG)(UINT_PTR)params[1], (ULONG)(UINT_PTR)params[2]);
 		break;
 
 	//	Ordinal stored in an extent file does not match the actual order
@@ -308,7 +308,7 @@ ULONG VDiskCallback(ULONG reason, PVOID *params)
 	//				FALSE	abort
 	case VDISK_CB_COWD_ORDINAL:
 		PrintMessage(MSG_CB_COWD_ORDINAL,
-			(PCHAR)params[0], (ULONG)params[1], (ULONG)params[2]);
+			(PCHAR)params[0], (ULONG)(UINT_PTR)params[1], (ULONG)(UINT_PTR)params[2]);
 
 		ret = (InputChar(MSG_PROMPT_YESNO, "yn") == 'y');
 		break;
@@ -322,23 +322,23 @@ ULONG VDiskCallback(ULONG reason, PVOID *params)
 	//				FALSE	abort
 	case VDISK_CB_CONF_FILEVER:
 		PrintMessage(MSG_CB_CONF_FILEVER,
-			(PCHAR)params[0], (ULONG)params[1],
-			(PCHAR)params[2], (ULONG)params[3]);
+			(PCHAR)params[0], (ULONG)(UINT_PTR)params[1],
+			(PCHAR)params[2], (ULONG)(UINT_PTR)params[3]);
 		break;
 	case VDISK_CB_CONF_FLAGS:
 		PrintMessage(MSG_CB_CONF_FLAGS,
-			(PCHAR)params[0], (ULONG)params[1],
-			(PCHAR)params[2], (ULONG)params[3]);
+			(PCHAR)params[0], (ULONG)(UINT_PTR)params[1],
+			(PCHAR)params[2], (ULONG)(UINT_PTR)params[3]);
 		break;
 	case VDISK_CB_CONF_PARENTTS:
 		PrintMessage(MSG_CB_CONF_PARENTTS,
-			(PCHAR)params[0], (ULONG)params[1],
-			(PCHAR)params[2], (ULONG)params[3]);
+			(PCHAR)params[0], (ULONG)(UINT_PTR)params[1],
+			(PCHAR)params[2], (ULONG)(UINT_PTR)params[3]);
 		break;
 	case VDISK_CB_CONF_TIMESTAMP:
 		PrintMessage(MSG_CB_CONF_TIMESTAMP,
-			(PCHAR)params[0], (ULONG)params[1],
-			(PCHAR)params[2], (ULONG)params[3]);
+			(PCHAR)params[0], (ULONG)(UINT_PTR)params[1],
+			(PCHAR)params[2], (ULONG)(UINT_PTR)params[3]);
 		break;
 	case VDISK_CB_CONF_CONTROLLER:
 		PrintMessage(MSG_CB_CONF_CONTROLLER,
@@ -347,48 +347,48 @@ ULONG VDiskCallback(ULONG reason, PVOID *params)
 		break;
 	case VDISK_CB_CONF_EXTENTS:
 		PrintMessage(MSG_CB_CONF_EXTENTS,
-			(PCHAR)params[0], (ULONG)params[1],
-			(PCHAR)params[2], (ULONG)params[3]);
+			(PCHAR)params[0], (ULONG)(UINT_PTR)params[1],
+			(PCHAR)params[2], (ULONG)(UINT_PTR)params[3]);
 		break;
 	case VDISK_CB_CONF_CYLINDERS:
 		PrintMessage(MSG_CB_CONF_CYLINDERS,
-			(PCHAR)params[0], (ULONG)params[1],
-			(PCHAR)params[2], (ULONG)params[3]);
+			(PCHAR)params[0], (ULONG)(UINT_PTR)params[1],
+			(PCHAR)params[2], (ULONG)(UINT_PTR)params[3]);
 		break;
 	case VDISK_CB_CONF_TRACKS:
 		PrintMessage(MSG_CB_CONF_TRACKS,
-			(PCHAR)params[0], (ULONG)params[1],
-			(PCHAR)params[2], (ULONG)params[3]);
+			(PCHAR)params[0], (ULONG)(UINT_PTR)params[1],
+			(PCHAR)params[2], (ULONG)(UINT_PTR)params[3]);
 		break;
 	case VDISK_CB_CONF_SECTORS:
 		PrintMessage(MSG_CB_CONF_SECTORS,
-			(PCHAR)params[0], (ULONG)params[1],
-			(PCHAR)params[2], (ULONG)params[3]);
+			(PCHAR)params[0], (ULONG)(UINT_PTR)params[1],
+			(PCHAR)params[2], (ULONG)(UINT_PTR)params[3]);
 		break;
 	case VDISK_CB_CONF_CAPACITY:
 		PrintMessage(MSG_CB_CONF_CAPACITY,
-			(PCHAR)params[0], (ULONG)params[1],
-			(PCHAR)params[2], (ULONG)params[3]);
+			(PCHAR)params[0], (ULONG)(UINT_PTR)params[1],
+			(PCHAR)params[2], (ULONG)(UINT_PTR)params[3]);
 		break;
 	case VDISK_CB_CONF_HARDWARE:
 		PrintMessage(MSG_CB_CONF_HARDWARE,
-			(PCHAR)params[0], (ULONG)params[1],
-			(PCHAR)params[2], (ULONG)params[3]);
+			(PCHAR)params[0], (ULONG)(UINT_PTR)params[1],
+			(PCHAR)params[2], (ULONG)(UINT_PTR)params[3]);
 		break;
 	case VDISK_CB_CONF_TOOLSFLAG:
 		PrintMessage(MSG_CB_CONF_TOOLSFLAG,
-			(PCHAR)params[0], (ULONG)params[1],
-			(PCHAR)params[2], (ULONG)params[3]);
+			(PCHAR)params[0], (ULONG)(UINT_PTR)params[1],
+			(PCHAR)params[2], (ULONG)(UINT_PTR)params[3]);
 		break;
 	case VDISK_CB_CONF_SEQNUM:
 		PrintMessage(MSG_CB_CONF_SEQNUM,
-			(PCHAR)params[0], (ULONG)params[1],
-			(PCHAR)params[2], (ULONG)params[3]);
+			(PCHAR)params[0], (ULONG)(UINT_PTR)params[1],
+			(PCHAR)params[2], (ULONG)(UINT_PTR)params[3]);
 		break;
 	case VDISK_CB_CONF_PARENTPATH:
 		PrintMessage(MSG_CB_CONF_PARENTPATH,
-			(PCHAR)params[0], (PCHAR)params[1],
-			(PCHAR)params[2], (PCHAR)params[3]);
+			(PCHAR)params[0], (PCHAR)(UINT_PTR)params[1],
+			(PCHAR)params[2], (PCHAR)(UINT_PTR)params[3]);
 		break;
 
 	//	prompts to ignore non-fatal conflicts
@@ -406,7 +406,7 @@ ULONG VDiskCallback(ULONG reason, PVOID *params)
 	//				FALSE	abort
 	case VDISK_CB_COWD_CAPACITY:
 		PrintMessage(MSG_CB_COWD_CAPACITY,
-			(PCHAR)params[0], (ULONG)params[1], (ULONG)params[2]);
+			(PCHAR)params[0], (ULONG)(UINT_PTR)params[1], (ULONG)(UINT_PTR)params[2]);
 		break;
 
 	//	Invalid cowd version
@@ -415,7 +415,7 @@ ULONG VDiskCallback(ULONG reason, PVOID *params)
 	//	return:		correct version
 	case VDISK_CB_COWD_FILEVER:
 		PrintMessage(MSG_CB_COWD_FILEVER,
-			(PCHAR)params[0], (ULONG)params[1]);
+			(PCHAR)params[0], (ULONG)(UINT_PTR)params[1]);
 
 		ret = (InputChar(MSG_PROMPT_ABORTIGNORE, "ai") == 'i')
 			? COWD_FILEVER_VMWARE3 : 0;
@@ -464,7 +464,7 @@ ULONG VDiskCallback(ULONG reason, PVOID *params)
 	//	return:		corrected map size
 	case VDISK_CB_COWD_MAPSIZE:
 		PrintMessage(MSG_CB_COWD_MAPSIZE,
-			(PCHAR)params[0], (ULONG)params[1], (ULONG)params[2]);
+			(PCHAR)params[0], (ULONG)(UINT_PTR)params[1], (ULONG)(UINT_PTR)params[2]);
 
 /*
 		if (InputChar(MSG_PROMPT_ABORTIGNORE, "ai") == 'i') {
@@ -481,7 +481,7 @@ ULONG VDiskCallback(ULONG reason, PVOID *params)
 	//				FALSE	fail
 	case VDISK_CB_COWD_ENDOFFILE:
 		PrintMessage(MSG_CB_COWD_ENDOFFILE,
-			(PCHAR)params[0], (ULONG)params[1], (ULONG)params[2]);
+			(PCHAR)params[0], (ULONG)(UINT_PTR)params[1], (ULONG)(UINT_PTR)params[2]);
 
 		ret = TRUE;;
 		break;
@@ -494,7 +494,7 @@ ULONG VDiskCallback(ULONG reason, PVOID *params)
 	//				FALSE	fail
 	case VDISK_CB_COWD_TIMESTAMP:
 		PrintMessage(MSG_CB_COWD_TIMESTAMP,
-			(PCHAR)params[0], (ULONG)params[1], (ULONG)params[2]);
+			(PCHAR)params[0], (ULONG)(UINT_PTR)params[1], (ULONG)(UINT_PTR)params[2]);
 
 		ret = (InputChar(MSG_PROMPT_ABORTIGNORE, "ai") == 'i');
 		break;
@@ -512,7 +512,7 @@ ULONG VDiskCallback(ULONG reason, PVOID *params)
 	//	return:		correct version
 	case VDISK_CB_VMDK_FILEVER:
 		PrintMessage(MSG_CB_VMDK_FILEVER,
-			(PCHAR)params[0], (ULONG)params[1]);
+			(PCHAR)params[0], (ULONG)(UINT_PTR)params[1]);
 
 		ret = (InputChar(MSG_PROMPT_ABORTIGNORE, "ai") == 'i')
 			? VMDK_FILEVER_VMWARE4 : 0;
@@ -565,7 +565,7 @@ ULONG VDiskCallback(ULONG reason, PVOID *params)
 	//				FALSE	abort
 	case VDISK_CB_VMDK_GTESPERGT:
 		PrintMessage(MSG_CB_VMDK_GTESPERGT,
-			(PCHAR)params[0], (ULONG)params[1]);
+			(PCHAR)(UINT_PTR)params[0], (ULONG)(UINT_PTR)params[1]);
 		break;
 
 	//	Invalid vmdk grain dictionary offset
@@ -606,7 +606,7 @@ ULONG VDiskCallback(ULONG reason, PVOID *params)
 	//				FALSE	abort
 	case VDISK_CB_VMDK_SIZEMISMATCH:
 		PrintMessage(MSG_CB_VMDK_SIZEMISMATCH,
-			(PCHAR)params[0], (ULONG)params[1], (ULONG)params[2]);
+			(PCHAR)params[0], (ULONG)(UINT_PTR)params[1], (ULONG)(UINT_PTR)params[2]);
 
 		ret = (InputChar(MSG_PROMPT_YESNO, "yn") == 'y');
 		break;
@@ -619,8 +619,8 @@ ULONG VDiskCallback(ULONG reason, PVOID *params)
 	//	return:		NONE	this is fatal
 	case VDISK_CB_PARENT_CAPACITY:
 		PrintMessage(MSG_CB_PARENT_CAPACITY,
-			(PCHAR)params[0], (ULONG)params[1],
-			(PCHAR)params[2], (ULONG)params[3]);
+			(PCHAR)params[0], (ULONG)(UINT_PTR)params[1],
+			(PCHAR)params[2], (ULONG)(UINT_PTR)params[3]);
 		break;
 
 	//	Controller type of the child and the parent do not match
@@ -632,8 +632,8 @@ ULONG VDiskCallback(ULONG reason, PVOID *params)
 	//				FALSE	abort
 	case VDISK_CB_PARENT_CONTROLLER:
 		PrintMessage(MSG_CB_PARENT_CONTROLLER,
-			(PCHAR)params[0], (ULONG)params[1] == VDISK_CONTROLLER_SCSI ? "SCSI" : "IDE",
-			(PCHAR)params[2], (ULONG)params[3] == VDISK_CONTROLLER_SCSI ? "SCSI" : "IDE");
+			(PCHAR)params[0], (ULONG)(UINT_PTR)params[1] == VDISK_CONTROLLER_SCSI ? "SCSI" : "IDE",
+			(PCHAR)params[2], (ULONG)(UINT_PTR)params[3] == VDISK_CONTROLLER_SCSI ? "SCSI" : "IDE");
 
 		ret = (InputChar(MSG_PROMPT_ABORTIGNORE, "ai") == 'i');
 		break;
@@ -647,8 +647,8 @@ ULONG VDiskCallback(ULONG reason, PVOID *params)
 	//				FALSE	abort
 	case VDISK_CB_PARENT_TIMESTAMP:
 		PrintMessage(MSG_CB_PARENT_TIMESTAMP,
-			(PCHAR)params[0], (ULONG)params[1],
-			(PCHAR)params[2], (ULONG)params[3]);
+			(PCHAR)params[0], (ULONG)(UINT_PTR)params[1],
+			(PCHAR)params[2], (ULONG)(UINT_PTR)params[3]);
 
 		ret = (InputChar(MSG_PROMPT_ABORTIGNORE, "ai") == 'i');
 		break;

@@ -91,7 +91,7 @@ VDKSTAT VDiskExtCowd::Check()
 	//
 	if (m_Sec0.Signature != COWD_SIGNATURE) {
 
-		cbparams[1] = (PVOID)m_Sec0.Signature;
+		cbparams[1] = (PVOID)(UINT_PTR)m_Sec0.Signature;
 
 		if (!VDiskCallBack(VDISK_CB_SIGNATURE, cbparams)) {
 			return VDK_CANCEL;
@@ -107,7 +107,7 @@ VDKSTAT VDiskExtCowd::Check()
 	if (m_Sec0.Version != COWD_FILEVER_VMWARE2 &&
 		m_Sec0.Version != COWD_FILEVER_VMWARE3) {
 
-		cbparams[1] = (PVOID)m_Sec0.Version;
+		cbparams[1] = (PVOID)(UINT_PTR)m_Sec0.Version;
 
 		m_Sec0.Version = VDiskCallBack(
 			VDISK_CB_COWD_FILEVER, cbparams);
@@ -200,8 +200,8 @@ VDKSTAT VDiskExtCowd::Check()
 
 	if (ultmp != m_Sec0.PrimaryMapSize) {
 
-		cbparams[1] = (PVOID)m_Sec0.PrimaryMapSize;
-		cbparams[2] = (PVOID)ultmp;
+		cbparams[1] = (PVOID)(UINT_PTR)m_Sec0.PrimaryMapSize;
+		cbparams[2] = (PVOID)(UINT_PTR)ultmp;
 
 		if (!VDiskCallBack(VDISK_CB_COWD_MAPSIZE, cbparams)) {
 			return VDK_DATA;
@@ -217,8 +217,8 @@ VDKSTAT VDiskExtCowd::Check()
 	//
 	if ((INT64)m_Sec0.EndOfFile << VDK_BYTE_SHIFT_TO_SECTOR != m_nFileSize) {
 
-		cbparams[1] = (PVOID)m_Sec0.EndOfFile;
-		cbparams[2] = (PVOID)(m_nFileSize >> VDK_BYTE_SHIFT_TO_SECTOR);
+		cbparams[1] = (PVOID)(UINT_PTR)m_Sec0.EndOfFile;
+		cbparams[2] = (PVOID)(UINT_PTR)(m_nFileSize >> VDK_BYTE_SHIFT_TO_SECTOR);
 
 		if (!VDiskCallBack(VDISK_CB_COWD_ENDOFFILE, cbparams)) {
 			return VDK_DATA;
@@ -235,8 +235,8 @@ VDKSTAT VDiskExtCowd::Check()
 	if (m_Sec2.TimeStamp !=
 		m_Sec3.TimeStamp) {
 
-		cbparams[1] = (PVOID)m_Sec2.TimeStamp;
-		cbparams[2] = (PVOID)m_Sec3.TimeStamp;
+		cbparams[1] = (PVOID)(UINT_PTR)m_Sec2.TimeStamp;
+		cbparams[2] = (PVOID)(UINT_PTR)m_Sec3.TimeStamp;
 
 		if (!VDiskCallBack(VDISK_CB_COWD_TIMESTAMP, cbparams)) {
 			return VDK_CANCEL;

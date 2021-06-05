@@ -1,6 +1,0 @@
-#
-# Dirs file for VDK NT kernel-mode driver
-# Copyright (C) 2003 Ken Kato
-#
-
-DIRS=cmn drv

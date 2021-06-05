@@ -31,8 +31,8 @@
 
 #define VDK_DESCRIPTION 		"Virtual Disk Driver Control Program"
 #define VDK_INTERNALNAME		"vdk.exe"
-#define VDK_FILEVERSION			3,2,0,0
-#define VDK_FILEVERSION_STR		"3.2"
+#define VDK_FILEVERSION			3,3,0,0
+#define VDK_FILEVERSION_STR		"3.3"
 
 //
 //	for Japanese version resources

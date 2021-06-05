@@ -96,7 +96,7 @@ VDKSTAT VdkReadFileAt(
 #ifdef VDK_KERNEL_DRIVER
 
 #define VdkCloseFile(a)				ZwClose(a)
-#define VdkAllocMem(a)				ExAllocatePool(NonPagedPool,a)
+#define VdkAllocMem(a)				ExAllocatePool2(POOL_FLAG_NON_PAGED,a,'util')
 #define VdkFreeMem(a)				ExFreePool(a)
 #define VdkZeroMem(a,b)				RtlZeroMemory(a,b)
 #define VdkCopyMem(a,b,c)			RtlCopyMemory(a,b,c)

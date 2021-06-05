@@ -128,7 +128,7 @@ int main(int argc, char **argv)
 	printf(
 		VDK_PRODUCT_NAME " version "
 		VDK_PRODUCT_VERSION_STR VDK_DEBUG_TAG "\n"
-		"http://chitchat.at.infoseek.co.jp/vmware/\n\n"
+		"https://github.com/sherpya/vdk\n\n"
 	);
 
 	if (!IsUserAdmin()) {
@@ -1283,7 +1283,7 @@ int	Close(char **args)
 		fflush(stdout);
 
 		ret = VdkCloseDrive(
-			disk_number, Retry_Callback, Continue_Callback, (PVOID)interact);
+			disk_number, Retry_Callback, Continue_Callback, (PVOID)(UINT_PTR)interact);
 
 		if (ret == ERROR_SUCCESS) {
 			PrintMessage(MSG_CLOSE_OK);
@@ -1591,7 +1591,7 @@ int Image(char **args)
 		//
 		PrintMessage(MSG_PARTITION_HEADER);
 
-		ret = VdkListPartitions(NULL, hDisk, file_info->Capacity, PartList_Callback, (PVOID)disk_number);
+		ret = VdkListPartitions(NULL, hDisk, file_info->Capacity, PartList_Callback, (PVOID)(UINT_PTR)disk_number);
 
 		VdkFreeMem(file_info);
 		CloseHandle(hDisk);
@@ -1925,11 +1925,11 @@ DWORD Continue_Callback(PVOID param, DWORD err)
 {
 	UNREFERENCED_PARAMETER(err);
 
-	if ((ULONG)param == CLOSE_QUIET) {
+	if ((UINT_PTR)param == CLOSE_QUIET) {
 		// quiet mode
 		return FALSE;
 	}
-	else if ((ULONG)param == CLOSE_FORCE) {
+	else if ((UINT_PTR)param == CLOSE_FORCE) {
 		// force mode
 		PrintMessage(MSG_CLOSE_FORCED);
 		return TRUE;
@@ -1951,9 +1951,9 @@ void PartList_Callback(PPARTITION_ITEM pitem, PVOID param)
 {
 	CHAR drive[] = " :";
 
-	if ((ULONG)param != (ULONG)-1) {
+	if ((ULONG)(UINT_PTR)param != (ULONG)-1) {
 		VdkGetDriveLetter(
-			(ULONG)param,
+			(ULONG)(UINT_PTR)param,
 			pitem->idx,
 			&drive[0]);
 	}
@@ -2029,7 +2029,7 @@ print_info:
 	//
 	//	print partition information
 	//
-	PartList_Callback(pitem, (PVOID)(assign->disk_number));
+	PartList_Callback(pitem, (PVOID)(UINT_PTR)(assign->disk_number));
 }
 
 //

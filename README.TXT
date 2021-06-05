@@ -2,6 +2,7 @@
     Virtual Disk Driver for Windows NT platform.
     Copyright (C) 2003-2005 Ken Kato (chitchat-lj@infoseek.jp)
     http://chitchat.at.infoseek.co.jp/vmware/vdk.html
+    Copyright (c) 2021 Gianluigi Tiesi <sherpya@netfarm.it>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -873,6 +874,8 @@ NOTES
 
 HISTORY
 =======
+    05-06-2021  Version 3.3 (VDK.SYS 3.3, VDK.EXE 3.3)
+                - Modernization, cmake and fixes
 
     06-04-2005  Version 3.2 (VDK.SYS 3.1, VDK.EXE 3.2)
                 - Accept virtual disks created with VMware 5.x

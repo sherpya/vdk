@@ -157,8 +157,8 @@ VdkDeviceControl (
 				SeDeleteClientSecurity(disk_extension->SecurityContext);
 			}
 			else {
-				disk_extension->SecurityContext = ExAllocatePool(
-					NonPagedPool, sizeof(SECURITY_CLIENT_CONTEXT));
+				disk_extension->SecurityContext = ExAllocatePool2(
+					POOL_FLAG_NON_PAGED, sizeof(SECURITY_CLIENT_CONTEXT), 'ioct');
 
 				if (!disk_extension->SecurityContext) {
 

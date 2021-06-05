@@ -423,8 +423,8 @@ VDKSTAT VDiskPlain::Check()
 
 		if (ext->GetStartOffset() != m_nCapacity) {
 			cbparams[0] = ext->GetFullPath();
-			cbparams[1] = (PVOID)ext->GetStartOffset();
-			cbparams[2] = (PVOID)m_nCapacity;
+			cbparams[1] = (PVOID)(UINT_PTR)ext->GetStartOffset();
+			cbparams[2] = (PVOID)(UINT_PTR)m_nCapacity;
 
 			//
 			//	file range conflict or there is a hole

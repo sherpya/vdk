@@ -44,7 +44,6 @@ static PVOID MmGetSystemAddressForMdlPrettySafe (
 	IN PMDL 			Mdl,
 	IN MM_PAGE_PRIORITY	Priority)
 {
-#if (VER_PRODUCTBUILD >= 2195)
 	if (OsMajorVersion == 0) {
 		StoreCurrentOsVersion();
 	}
@@ -53,7 +52,6 @@ static PVOID MmGetSystemAddressForMdlPrettySafe (
 		return MmGetSystemAddressForMdlSafe(Mdl, Priority);
 	}
 	else {
-#endif	// (VER_PRODUCTBUILD >= 2195)
 		CSHORT	MdlMappingCanFail;
 		PVOID	MappedSystemVa;
 
@@ -61,16 +59,14 @@ static PVOID MmGetSystemAddressForMdlPrettySafe (
 
 		Mdl->MdlFlags |= MDL_MAPPING_CAN_FAIL;
 
-		MappedSystemVa = MmGetSystemAddressForMdl(Mdl);
+		MappedSystemVa = MmGetSystemAddressForMdlSafe(Mdl, MdlMappingCanFail ? NormalPagePriority : HighPagePriority);
 
 		if (!MdlMappingCanFail) {
 			Mdl->MdlFlags &= ~MDL_MAPPING_CAN_FAIL;
 		}
 
 		return MappedSystemVa;
-#if (VER_PRODUCTBUILD >= 2195)
 	}
-#endif
 }
 
 //
@@ -566,7 +562,7 @@ VdkFormat(
 		ULONG buf_length =
 			DiskInfo->Sectors << VDK_BYTE_SHIFT_TO_SECTOR;
 
-		format_buffer = ExAllocatePool(PagedPool, buf_length);
+		format_buffer = ExAllocatePool2(POOL_FLAG_PAGED | POOL_FLAG_UNINITIALIZED, buf_length, 'thre');
 
 		if (format_buffer == NULL) {
 

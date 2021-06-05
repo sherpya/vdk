@@ -88,8 +88,8 @@ VDKSTAT VDiskExtRaw::Check()
 
 		ULONG reply;
 
-		cbparams[1] = (PVOID)(m_nCapacity + m_nBackOffset);
-		cbparams[2] = (PVOID)(m_nFileSize >> VDK_BYTE_SHIFT_TO_SECTOR);
+		cbparams[1] = (PVOID)(UINT_PTR)(m_nCapacity + m_nBackOffset);
+		cbparams[2] = (PVOID)(INT_PTR)(INT)(m_nFileSize >> VDK_BYTE_SHIFT_TO_SECTOR);
 
 		reply = VDiskCallBack(VDISK_CB_EXT_FILESIZE, cbparams);
 

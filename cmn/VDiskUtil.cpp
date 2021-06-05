@@ -418,7 +418,7 @@ VDKSTAT VDiskSearchFile(HANDLE *pFile, PCHAR pPath, PCHAR pBase)
 	do {
 		PVOID cbparams[2];
 		cbparams[0] = path;
-		cbparams[1] = (PVOID)ret;
+		cbparams[1] = (PVOID)(INT_PTR)ret;
 
 		if (!VDiskCallBack(VDISK_CB_FILE_OPEN, cbparams)) {
 			return ret;

@@ -180,7 +180,7 @@ VdkCreateDisk(
 	// Store device name
 	//
 	disk_extension->DeviceName.Buffer =
-		ExAllocatePool(NonPagedPool, obj_name.Length + sizeof(WCHAR));
+		ExAllocatePool2(POOL_FLAG_NON_PAGED, obj_name.Length + sizeof(WCHAR), 'crea');
 
 	if (!disk_extension->DeviceName.Buffer) {
 		VDKTRACE(VDKCREATE,
@@ -193,10 +193,6 @@ VdkCreateDisk(
 	disk_extension->DeviceName.Length = obj_name.Length;
 	disk_extension->DeviceName.MaximumLength = obj_name.Length;
 
-	RtlZeroMemory(
-		disk_extension->DeviceName.Buffer,
-		obj_name.Length + sizeof(WCHAR));
-
 	RtlCopyMemory(
 		disk_extension->DeviceName.Buffer,
 		obj_name.Buffer,
@@ -206,7 +202,7 @@ VdkCreateDisk(
 	// Store symbolic link
 	//
 	disk_extension->SymbolicLink.Buffer =
-		ExAllocatePool(NonPagedPool, link_name.Length + sizeof(WCHAR));
+		ExAllocatePool2(POOL_FLAG_NON_PAGED, link_name.Length + sizeof(WCHAR), 'crea');
 
 	if (!disk_extension->SymbolicLink.Buffer) {
 		VDKTRACE(VDKCREATE,
@@ -218,10 +214,6 @@ VdkCreateDisk(
 
 	disk_extension->SymbolicLink.Length = link_name.Length;
 	disk_extension->SymbolicLink.MaximumLength = link_name.Length;
-
-	RtlZeroMemory(
-		disk_extension->SymbolicLink.Buffer,
-		link_name.Length + sizeof(WCHAR));
 
 	RtlCopyMemory(
 		disk_extension->SymbolicLink.Buffer,
@@ -289,15 +281,11 @@ VdkCreateDisk(
 	RtlInitUnicodeString(&link_name, link_buffer);
 
 	disk_extension->AnotherLink.Buffer =
-		ExAllocatePool(NonPagedPool, link_name.Length + sizeof(WCHAR));
+		ExAllocatePool2(POOL_FLAG_NON_PAGED, link_name.Length + sizeof(WCHAR), 'crea');
 
 	if (disk_extension->AnotherLink.Buffer) {
 		disk_extension->AnotherLink.Length = link_name.Length;
 		disk_extension->AnotherLink.MaximumLength = link_name.Length;
-
-		RtlZeroMemory(
-			disk_extension->AnotherLink.Buffer,
-			link_name.Length + sizeof(WCHAR));
 
 		RtlCopyMemory(
 			disk_extension->AnotherLink.Buffer,

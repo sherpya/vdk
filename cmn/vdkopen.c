@@ -299,9 +299,6 @@ VDKSTAT	VdkOpenDisk(
 		goto cleanup_exit;
 	}
 
-	VdkZeroMem(DiskInfo->Files,
-		sizeof(VDK_FILE_INFO) * OpenFile->FilesTotal);
-
 
 	//
 	//	process each files
@@ -486,8 +483,6 @@ VDKSTAT VdkSetCowdParam(
 
 		return VDK_NOMEMORY;
 	}
-
-	VdkZeroMem(cowd_prm, sizeof(VDK_COWD_PARAM));
 
 	FileInfo->prm.cowd = cowd_prm;
 
@@ -911,10 +906,6 @@ VDKSTAT VdkSetVmdkParam(
 		VDKTRACE(VDKOPEN,
 			("[VDK] Invalid Grain Table[0] Offset %u\n",
 			vmdk_prm->PrimaryDirectory[0]));
-
-		VdkZeroMem(
-			vmdk_prm->GrainTable,
-			vmdk_prm->GrainTableSize * sizeof(ULONG));
 	}
 	else {
 

@@ -387,15 +387,11 @@ VdkUpdateDevice(
 				// Store device name
 				//
 				part_extension->DeviceName.Buffer =
-					ExAllocatePool(NonPagedPool, uni_name.Length + sizeof(WCHAR));
+					ExAllocatePool2(POOL_FLAG_NON_PAGED, uni_name.Length + sizeof(WCHAR), 'upda');
 
 				if (part_extension->DeviceName.Buffer) {
 					part_extension->DeviceName.Length = uni_name.Length;
 					part_extension->DeviceName.MaximumLength = uni_name.Length;
-
-					RtlZeroMemory(
-						part_extension->DeviceName.Buffer,
-						uni_name.Length + sizeof(WCHAR));
 
 					RtlCopyMemory(
 						part_extension->DeviceName.Buffer,
@@ -446,15 +442,11 @@ VdkUpdateDevice(
 					name_buf));
 
 				part_extension->SymbolicLink.Buffer =
-					ExAllocatePool(NonPagedPool, uni_name.Length + sizeof(WCHAR));
+					ExAllocatePool2(POOL_FLAG_NON_PAGED, uni_name.Length + sizeof(WCHAR), 'upda');
 
 				if (part_extension->SymbolicLink.Buffer) {
 					part_extension->SymbolicLink.Length = uni_name.Length;
 					part_extension->SymbolicLink.MaximumLength = uni_name.Length;
-
-					RtlZeroMemory(
-						part_extension->SymbolicLink.Buffer,
-						uni_name.Length + sizeof(WCHAR));
 
 					RtlCopyMemory(
 						part_extension->SymbolicLink.Buffer,

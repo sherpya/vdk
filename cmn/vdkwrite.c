@@ -92,7 +92,7 @@ VDKSTAT VdkWriteSector(
 		}
 
 		VDKTRACE(VDKWRITE | VDKINFO,
-			("[VDK] Checking file #%u.\n",
+			("[VDK] Checking file #%I64u.\n",
 			cur_file - DiskInfo->Files));
 
 		//
@@ -191,7 +191,7 @@ VDKSTAT VdkWriteSector(
 					cur_file->EndOfFile;
 
 				VDKTRACE(VDKWRITE | VDKINFO,
-					("[VDK] Writing PrimaryMap at offset %lu (%lu bytes.)\n",
+					("[VDK] Writing PrimaryMap at offset %I64u (%I64u bytes.)\n",
 					((PCOWD_SECTOR_0)cur_file->prm.cowd->Sector0)->PrimaryMapOffset,
 					cur_file->prm.cowd->PrimaryMapSize * sizeof(ULONG)));
 

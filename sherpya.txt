@@ -1,11 +1,9 @@
 20110213 - Adapted to WDK 7600.16385.1 and Visual Studio 2010
+20210605 - Modernization, cmake build fixes
 
-Windows 64bit build, compiled with WinDDK 6001.18002 and VC 2005 SP1
-Tweaked for 64bit compatibility thus I don't assure all works
-as expected.
-I've also updated version number to 3.2 since the original sources
-still has 3.1
+Compiled WDK for Windows 10, version 2004 and Visual Studio 2019.
+I'm sure there are still some 64bit compatibility issues.
 
 Use at your own risk
-URL: http://oss.netfarm.it/win32/
+URL: https://oss.netfarm.it/win32/
 EMAIL: Gianluigi Tiesi <sherpya@netfarm.it>

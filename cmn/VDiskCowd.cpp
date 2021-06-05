@@ -183,8 +183,8 @@ VDKSTAT VDiskCowd::Check()
 		if (ext->GetSec3()->FileOrdinal != idx) {
 
 			cbparams[0] = ext->GetFileName();
-			cbparams[1] = (PVOID)ext->GetSec3()->FileOrdinal;
-			cbparams[2] = (PVOID)idx;
+			cbparams[1] = (PVOID)(UINT_PTR)ext->GetSec3()->FileOrdinal;
+			cbparams[2] = (PVOID)(UINT_PTR)idx;
 
 			if (!VDiskCallBack(VDISK_CB_COWD_ORDINAL, cbparams)) {
 				return VDK_CANCEL;
@@ -217,32 +217,32 @@ VDKSTAT VDiskCowd::Check()
 		//	FATAL conflicts
 		//
 		if (sec0_0->Version != sec0->Version) {
-			cbparams[1] = (PVOID)sec0_0->Version;
-			cbparams[3] = (PVOID)sec0->Version;
+			cbparams[1] = (PVOID)(UINT_PTR)sec0_0->Version;
+			cbparams[3] = (PVOID)(UINT_PTR)sec0->Version;
 
 			VDiskCallBack(VDISK_CB_CONF_FILEVER, cbparams);
 			fatal = TRUE;
 		}
 
 		if (sec0_0->Flags != sec0->Flags) {
-			cbparams[1] = (PVOID)sec0_0->Flags;
-			cbparams[3] = (PVOID)sec0->Flags;
+			cbparams[1] = (PVOID)(UINT_PTR)sec0_0->Flags;
+			cbparams[3] = (PVOID)(UINT_PTR)sec0->Flags;
 
 			VDiskCallBack(VDISK_CB_CONF_FLAGS, cbparams);
 			fatal = TRUE;
 		}
 
 		if (sec3_0->FilesPerDisk != sec3->FilesPerDisk) {
-			cbparams[1] = (PVOID)sec3_0->FilesPerDisk;
-			cbparams[3] = (PVOID)sec3->FilesPerDisk;
+			cbparams[1] = (PVOID)(UINT_PTR)sec3_0->FilesPerDisk;
+			cbparams[3] = (PVOID)(UINT_PTR)sec3->FilesPerDisk;
 
 			VDiskCallBack(VDISK_CB_CONF_EXTENTS, cbparams);
 			fatal = TRUE;
 		}
 
 		if (sec3_0->DiskCapacity != sec3->DiskCapacity) {
-			cbparams[1] = (PVOID)sec3_0->DiskCapacity;
-			cbparams[3] = (PVOID)sec3->DiskCapacity;
+			cbparams[1] = (PVOID)(UINT_PTR)sec3_0->DiskCapacity;
+			cbparams[3] = (PVOID)(UINT_PTR)sec3->DiskCapacity;
 
 			VDiskCallBack(VDISK_CB_CONF_CAPACITY, cbparams);
 			fatal = TRUE;
@@ -250,8 +250,8 @@ VDKSTAT VDiskCowd::Check()
 
 		if (!COWD_IS_ROOT(sec0_0->Flags)) {
 			if (sec0_0->Capacity != sec0->Capacity) {
-				cbparams[1] = (PVOID)sec0_0->Capacity;
-				cbparams[3] = (PVOID)sec0->Capacity;
+				cbparams[1] = (PVOID)(UINT_PTR)sec0_0->Capacity;
+				cbparams[3] = (PVOID)(UINT_PTR)sec0->Capacity;
 
 				VDiskCallBack(VDISK_CB_CONF_CAPACITY, cbparams);
 				fatal = TRUE;
@@ -271,16 +271,16 @@ VDKSTAT VDiskCowd::Check()
 		//
 
 		if (sec2_0->ParentTS != sec2->ParentTS) {
-			cbparams[1] = (PVOID)sec2_0->ParentTS;
-			cbparams[3] = (PVOID)sec2->ParentTS;
+			cbparams[1] = (PVOID)(UINT_PTR)sec2_0->ParentTS;
+			cbparams[3] = (PVOID)(UINT_PTR)sec2->ParentTS;
 
 			VDiskCallBack(VDISK_CB_CONF_PARENTTS, cbparams);
 			conflict = TRUE;
 		}
 
 		if (sec2_0->TimeStamp != sec2->TimeStamp) {
-			cbparams[1] = (PVOID)sec2_0->TimeStamp;
-			cbparams[3] = (PVOID)sec2->TimeStamp;
+			cbparams[1] = (PVOID)(UINT_PTR)sec2_0->TimeStamp;
+			cbparams[3] = (PVOID)(UINT_PTR)sec2->TimeStamp;
 
 			VDiskCallBack(VDISK_CB_CONF_TIMESTAMP, cbparams);
 			conflict = TRUE;
@@ -295,48 +295,48 @@ VDKSTAT VDiskCowd::Check()
 		}
 
 		if (sec3_0->Cylinders	!= sec3->Cylinders) {
-			cbparams[1] = (PVOID)sec3_0->Cylinders;
-			cbparams[3] = (PVOID)sec3->Cylinders;
+			cbparams[1] = (PVOID)(UINT_PTR)sec3_0->Cylinders;
+			cbparams[3] = (PVOID)(UINT_PTR)sec3->Cylinders;
 
 			VDiskCallBack(VDISK_CB_CONF_CYLINDERS, cbparams);
 			conflict = TRUE;
 		}
 
 		if (sec3_0->Tracks != sec3->Tracks) {
-			cbparams[1] = (PVOID)sec3_0->Tracks;
-			cbparams[3] = (PVOID)sec3->Tracks;
+			cbparams[1] = (PVOID)(UINT_PTR)sec3_0->Tracks;
+			cbparams[3] = (PVOID)(UINT_PTR)sec3->Tracks;
 
 			VDiskCallBack(VDISK_CB_CONF_TRACKS, cbparams);
 			conflict = TRUE;
 		}
 
 		if (sec3_0->Sectors != sec3->Sectors) {
-			cbparams[1] = (PVOID)sec3_0->Sectors;
-			cbparams[3] = (PVOID)sec3->Sectors;
+			cbparams[1] = (PVOID)(UINT_PTR)sec3_0->Sectors;
+			cbparams[3] = (PVOID)(UINT_PTR)sec3->Sectors;
 
 			VDiskCallBack(VDISK_CB_CONF_SECTORS, cbparams);
 			conflict = TRUE;
 		}
 
 		if (sec3_0->SequenceNumber != sec3->SequenceNumber) {
-			cbparams[1] = (PVOID)sec3_0->SequenceNumber;
-			cbparams[3] = (PVOID)sec3->SequenceNumber;
+			cbparams[1] = (PVOID)(UINT_PTR)sec3_0->SequenceNumber;
+			cbparams[3] = (PVOID)(UINT_PTR)sec3->SequenceNumber;
 
 			VDiskCallBack(VDISK_CB_CONF_SEQNUM, cbparams);
 			conflict = TRUE;
 		}
 
 		if (sec3_0->HardwareVer != sec3->HardwareVer) {
-			cbparams[1] = (PVOID)sec3_0->HardwareVer;
-			cbparams[3] = (PVOID)sec3->HardwareVer;
+			cbparams[1] = (PVOID)(UINT_PTR)sec3_0->HardwareVer;
+			cbparams[3] = (PVOID)(UINT_PTR)sec3->HardwareVer;
 
 			VDiskCallBack(VDISK_CB_CONF_HARDWARE, cbparams);
 			conflict = TRUE;
 		}
 
 		if (sec3_0->ToolsFlag != sec3->ToolsFlag) {
-			cbparams[1] = (PVOID)sec3_0->ToolsFlag;
-			cbparams[3] = (PVOID)sec3->ToolsFlag;
+			cbparams[1] = (PVOID)(UINT_PTR)sec3_0->ToolsFlag;
+			cbparams[3] = (PVOID)(UINT_PTR)sec3->ToolsFlag;
 
 			VDiskCallBack(VDISK_CB_CONF_TOOLSFLAG, cbparams);
 			conflict = TRUE;
@@ -417,8 +417,8 @@ VDKSTAT VDiskCowd::Check()
 		CHAR path[MAX_PATH];
 
 		cbparams[0] = path;
-		cbparams[1] = (PVOID)m_nCapacity;
-		cbparams[2] = (PVOID)total_sectors;
+		cbparams[1] = (PVOID)(UINT_PTR)m_nCapacity;
+		cbparams[2] = (PVOID)(UINT_PTR)total_sectors;
 
 		FullPath(path);
 

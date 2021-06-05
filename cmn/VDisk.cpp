@@ -265,8 +265,8 @@ VDKSTAT VDisk::CreateTree()
 				//	capacity mismatch
 				//	-- this is fatal
 
-				cbparams[1] = (PVOID)disk->m_nCapacity;
-				cbparams[3] = (PVOID)disk->m_pParent->m_nCapacity;
+				cbparams[1] = (PVOID)(UINT_PTR)disk->m_nCapacity;
+				cbparams[3] = (PVOID)(UINT_PTR)disk->m_pParent->m_nCapacity;
 
 				VDiskCallBack(VDISK_CB_PARENT_CAPACITY, cbparams);
 				return VDK_DATA;
@@ -276,8 +276,8 @@ VDKSTAT VDisk::CreateTree()
 
 				//	timestamp mismatch
 
-				cbparams[1] = (PVOID)disk->m_nParentTS;
-				cbparams[3] = (PVOID)disk->m_pParent->m_nTimeStamp;
+				cbparams[1] = (PVOID)(UINT_PTR)disk->m_nParentTS;
+				cbparams[3] = (PVOID)(UINT_PTR)disk->m_pParent->m_nTimeStamp;
 
 				if (!VDiskCallBack(VDISK_CB_PARENT_TIMESTAMP, cbparams)) {
 					return VDK_CANCEL;
@@ -289,8 +289,8 @@ VDKSTAT VDisk::CreateTree()
 
 				//	controller type mismatch
 
-				cbparams[1] = (PVOID)disk->m_nController;
-				cbparams[3] = (PVOID)disk->m_pParent->m_nController;
+				cbparams[1] = (PVOID)(UINT_PTR)disk->m_nController;
+				cbparams[3] = (PVOID)(UINT_PTR)disk->m_pParent->m_nController;
 
 				if (!VDiskCallBack(VDISK_CB_PARENT_CONTROLLER, cbparams)) {
 					return VDK_CANCEL;
